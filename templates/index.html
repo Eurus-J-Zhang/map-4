@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main_text %}
+<p class="t_title">
+  Hello, welcome to our experiment! <br>
+  <br>
+  Here, you will firstly be asked to fill a questionnaire about your current emotional state. <br>
+  And then you would be shown a task that is designed to arouse a certain emotion in you. <br><br>
+  This task is about reading a paragraph, and answering some related questions. <br>
+  You don’t need to remember anything, the paragraph will be presented with the questions all the time.<br>
+  In the middle and at end of the task, you'll be asked to fill questionnaires about your emotional states as well. <br>
+  <br>
+  
+  The whole task will take you around 15 minutes in total.<br>
+
+  Please enter your prolific id and demographic information to start this experiment:
+</p>
+
+
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <br>
+  <table class="my-table">
+      <tr>
+          <td><label for="id">Prolific ID:</label></td>
+          <td>{{ form.id(id='id', class = 'text-input') }}</td>
+      </tr>
+      <tr>
+          <td><label>Gender:</label></td>
+          <td>        {% for subfield in form.gender %}
+            <label>{{ subfield }} {{ subfield.label }}</label>
+            {% endfor %}</td>
+      </tr>
+      <tr>
+        <td><label for="age">Age:</label></td>
+        <td>{{ form.age(id='age', class = 'text-input') }}</td>
+    </tr>
+  </table>
+  <br>
+  <br>
+  <input type="submit" value="Start" class="start">
+</form>
+
+
+{% endblock %}
+
