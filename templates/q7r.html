@@ -4,7 +4,7 @@
 {% block script %}
 <script>
     function fn1(){
-        window.location="q8";
+        window.location="emo2";
     }
 </script>
 
@@ -12,7 +12,7 @@
 
 
 {% block title_text %}
-Please read the story and answer the question.
+Please read the text and answer the question.
 {% endblock %}
 
 {% block main_text %}
@@ -58,13 +58,11 @@ Indo-European branch.
 {% block result %}
 <div class="result">
     <div id="correct" style="display: {% if result == 'correct' %}block{% else %}none{% endif %};">
-
-        <p  id = "result"><span>&#10003;</span></p>
+        <p id = "result"><span>Correct! Please continue.</span></p>
     </div>
     <div id="wrong" style="display: {% if result == 'wrong' %}block{% else %}none{% endif %};">
-        <p id = "result"><span>&#x2717;</span></p>
+        <p id = "result"><span>Wrong! Please continue.</span></p>
     </div>
-
 </div>
 {% endblock %}
 

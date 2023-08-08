@@ -3,8 +3,9 @@
 
 {% block script %}
 <script>
+    alert("Error!! There seems to be some problems with the system. Click OK to continue.");
     function fn1(){
-        window.location="q21";
+        window.location="page_result";
     }
 </script>
 
@@ -12,7 +13,7 @@
 
 
 {% block title_text %}
-Please read the story and answer the question.
+Please read the text and answer the question.
 {% endblock %}
 
 {% block main_text %}
@@ -57,13 +58,15 @@ Indo-European branch.
 {% block result %}
 <div class="result">
     <div id="correct" style="display: {% if result == 'correct' %}block{% else %}none{% endif %};">
-
-        <p  id = "result"><span>&#10003;</span></p>
+        <p id = "result"><span>Correct! Please continue. <br>
+            Your current score: {{ counter }}
+        </span></p>
     </div>
     <div id="wrong" style="display: {% if result == 'wrong' %}block{% else %}none{% endif %};">
-        <p id = "result"><span>&#x2717;</span></p>
+        <p id = "result"><span>Wrong! Please continue.<br>
+            Your current score: {{ counter }}
+        </span></p>
     </div>
-
 </div>
 {% endblock %}
 

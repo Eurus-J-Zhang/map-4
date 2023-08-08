@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="emo4";
+    }
+</script>
+
+{% endblock %}
+
+
+{% block title_text %}
+
+{% endblock %}
+
+{% block main_text %}
+
+<p class="t_title">
+    
+        The task is over.<br><br>
+        Your score is {{ counter }} out of 20. And you have failed the task.<br><br>
+        Please click "Continue" to answer the questionnaire.
+    </p>
+
+<br>
+</p>
+
+
+
+
+
+{% endblock %}
+
+
+{% block result %}
+
+{% endblock %}
+
+{% block continue %}
+
+<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+{% endblock %}

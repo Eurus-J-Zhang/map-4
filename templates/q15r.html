@@ -3,6 +3,7 @@
 
 {% block script %}
 <script>
+    alert("Error!! There seems to be some problems with the system. Click OK to continue.");
     function fn1(){
         window.location="q16";
     }
@@ -12,7 +13,7 @@
 
 
 {% block title_text %}
-Please read the story and answer the question.
+Please read the text and answer the question.
 {% endblock %}
 
 {% block main_text %}
@@ -45,9 +46,9 @@ Indo-European branch.
     Which of the following country influenced the spread of modern English?<br>
 </p>
 <form id="form">
-    <input type="radio" id="A" name="choice" {% if answer == 'A' %}checked{% endif %}>
+    <input type="radio" id="A" name="choice" checked>
     <label for="A">Australia.</label><br>
-    <input type="radio" id="B" name="choice" {% if answer == 'B' %}checked{% endif %}>
+    <input type="radio" id="B" name="choice">
     <label for="B">The United States of America.</label><br>
 </form>
 
@@ -57,13 +58,11 @@ Indo-European branch.
 {% block result %}
 <div class="result">
     <div id="correct" style="display: {% if result == 'correct' %}block{% else %}none{% endif %};">
-
-        <p  id = "result"><span>&#10003;</span></p>
+        <p id = "result"><span>Correct! Please continue.</span></p>
     </div>
     <div id="wrong" style="display: {% if result == 'wrong' %}block{% else %}none{% endif %};">
-        <p id = "result"><span>&#x2717;</span></p>
+        <p id = "result"><span>Wrong! Please continue.</span></p>
     </div>
-
 </div>
 {% endblock %}
 
