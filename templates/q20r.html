@@ -46,9 +46,9 @@ Indo-European branch.
     How many sovereign states have English as an official language?<br>
 </p>
 <form id="form">
-    <input type="radio" id="A" name="choice" {% if answer == 'A' %}checked{% endif %}>
+    <input type="radio" id="A" name="choice" checked>
     <label for="A">39.</label><br>
-    <input type="radio" id="B" name="choice" {% if answer == 'B' %}checked{% endif %}>
+    <input type="radio" id="B" name="choice" >
     <label for="B">59.</label><br>
 </form>
 
@@ -59,12 +59,10 @@ Indo-European branch.
 <div class="result">
     <div id="correct" style="display: {% if result == 'correct' %}block{% else %}none{% endif %};">
         <p id = "result"><span>Correct! Please continue. <br>
-            Your current score: {{ counter }}
         </span></p>
     </div>
     <div id="wrong" style="display: {% if result == 'wrong' %}block{% else %}none{% endif %};">
         <p id = "result"><span>Wrong! Please continue.<br>
-            Your current score: {{ counter }}
         </span></p>
     </div>
 </div>
