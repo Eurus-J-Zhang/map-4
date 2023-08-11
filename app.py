@@ -108,7 +108,7 @@ def question_route(question_num, correct_answer, template_name):
             session['counter'] += 1 
         else:
             result = 'wrong'
-        return render_template(template_name + 'r.html', result=result, answer=answer)
+        return render_template(template_name + 'r.html', result=result, answer=answer,counter=session['counter'])
     return render_template(template_name + '.html')
 
 # Q1
@@ -376,8 +376,7 @@ def q20():
 
 @app.route('/q20r')
 def q20r():
-    return render_template('page_result.html',counter=session['counter'])
-    # return render_template('q20r.html')
+    return render_template('q20r.html')
 
 # result page
 @app.route('/page_result')
