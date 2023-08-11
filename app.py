@@ -16,8 +16,7 @@ pymysql.install_as_MySQLdb()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL') or 'sqlite:///test.db'
-    print(os.environ.get('JAWSDB_URL'))
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL')
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     app.config['SECRET_KEY'] = "iloveeurus"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -29,6 +28,13 @@ def create_app():
 
 app = create_app()
 
+def handle_form_submission(form, session_key, next_page):
+    if form.validate_on_submit():
+        data = form.data
+        data.pop('csrf_token', None)
+        session[session_key] = data
+        return redirect(next_page)
+    return None
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -44,79 +50,72 @@ def index():
 @app.route('/emo1', methods=['GET', 'POST'])
 def emo1():
     form = EmotionForm1()
-    if form.validate_on_submit():
-        data = form.data
-        data.pop('csrf_token', None)
-        session['page1_data'] = data
-        return redirect('q1')
+    result = handle_form_submission(form, 'emo1_data', 'q1')
+    if result:
+        return result
     return render_template('emo1.html',form=form)
-
 
 @app.route('/emo2', methods=['GET', 'POST'])
 def emo2():
     form = EmotionForm2()
-    if form.validate_on_submit():
-        data = form.data
-        data.pop('csrf_token', None)
-        session['page2_data'] = data
-        return redirect('q8')
+    result = handle_form_submission(form, 'emo2_data', 'q8')
+    if result:
+        return result
     return render_template('emo2.html',form=form)
 
 @app.route('/emo3', methods=['GET', 'POST'])
 def emo3():
     form = EmotionForm3()
-    if form.validate_on_submit():
-        data = form.data
-        data.pop('csrf_token', None)
-        session['page3_data'] = data
-        return redirect('q15')
+    result = handle_form_submission(form, 'emo3_data', 'q15')
+    if result:
+        return result
     return render_template('emo3.html',form=form)
+
 
 @app.route('/emo4', methods=['GET', 'POST'])
 def emo4():
     form = EmotionForm4()
-    if form.validate_on_submit():
-        data = form.data
-        data.pop('csrf_token', None)
-        session['page4_data'] = data
-        return redirect('emo_end')
+    result = handle_form_submission(form, 'emo4_data', 'emo_end')
+    if result:
+        return result
     return render_template('emo4.html',form=form)
 
 @app.route('/emo_end', methods=['GET', 'POST'])
 def emo_end():
     form = FeedbackForm()
-    if form.validate_on_submit():
-        data = form.data
-        data.pop('csrf_token', None)
-        session['page_end_data'] = data
-
+    result = handle_form_submission(form, 'emo_add_data', 'page_end')
+    if result:
         index_data = session.get('index_data')
-        page1_data = session.get('page1_data')
-        page2_data = session.get('page2_data')
-        page3_data = session.get('page3_data')
-        page4_data = session.get('page4_data')
-        page_end_data = session.get('page_end_data')
+        emo1_data = session.get('emo1_data')
+        emo2_data = session.get('emo2_data')
+        emo3_data = session.get('emo3_data')
+        emo4_data = session.get('emo4_data')
+        emo_add_data = session.get('emo_add_data')
         
-        combined_data = {**index_data, **page1_data, **page2_data, **page3_data, **page4_data, **page_end_data}
+        combined_data = {**index_data, **emo1_data, **emo2_data, **emo3_data, **emo4_data, **emo_add_data}
         data = Data(**combined_data)
         db.session.add(data)
         db.session.commit()
 
-        return redirect('page_end')
+        return result
     return render_template('emo_end.html',form=form)
+
+def question_route(question_num, correct_answer, template_name):
+    if request.method == 'POST':
+        answer = request.form['answer']
+        if answer == correct_answer:
+            result = 'correct'
+            session['counter'] += 1 
+        else:
+            result = 'wrong'
+        return render_template(template_name + 'r.html', result=result, answer=answer)
+    return render_template(template_name + '.html')
 
 # Q1
 @app.route('/q1', methods=['GET', 'POST'])
+
 def q1():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'A':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q1r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q1.html')
+    return question_route(1, 'A', 'q1')
 
 @app.route('/q1r')
 def q1r():
@@ -125,15 +124,7 @@ def q1r():
 # Q2
 @app.route('/q2', methods=['GET', 'POST'])
 def q2():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'A':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q2r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q2.html')
+    return question_route(2, 'A', 'q2')
 
 @app.route('/q2r')
 def q2r():
@@ -142,15 +133,7 @@ def q2r():
 # Q3
 @app.route('/q3', methods=['GET', 'POST'])
 def q3():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'B':
-            result = 'correct'            
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q3r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q3.html')
+    return question_route(3, 'B', 'q3')
 
 @app.route('/q3r')
 def q3r():
@@ -185,15 +168,7 @@ def q5r():
 # Q6
 @app.route('/q6', methods=['GET', 'POST'])
 def q6():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'B':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q6r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q6.html')
+    return question_route(6, 'B', 'q6')
 
 @app.route('/q6r')
 def q6r():
@@ -361,15 +336,7 @@ def q16r():
 # Q17
 @app.route('/q17', methods=['GET', 'POST'])
 def q17():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'B':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q17r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q17.html')
+    return question_route(17, 'B', 'q17')
 
 @app.route('/q17r')
 def q17r():
@@ -379,15 +346,7 @@ def q17r():
 # Q18
 @app.route('/q18', methods=['GET', 'POST'])
 def q18():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'B':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q18r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q18.html')
+    return question_route(18, 'B', 'q18')
 
 @app.route('/q18r')
 def q18r():
