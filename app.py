@@ -207,15 +207,7 @@ def q8r():
 # Q9
 @app.route('/q9', methods=['GET', 'POST'])
 def q9():
-    if request.method == 'POST':
-        answer = request.form['answer']
-        if answer == 'A':
-            result = 'correct'
-            session['counter'] += 1
-        else:
-            result = 'wrong'
-        return render_template('q9r.html', result=result, answer=answer, counter=session['counter'])
-    return render_template('q9.html')
+    return question_route(9, 'B', 'q9')
 
 @app.route('/q9r')
 def q9r():
