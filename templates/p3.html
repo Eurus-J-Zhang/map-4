@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="p4";
+    }
+</script>
+ {% endblock %}
+
+
+
+{% block main_text %}
+
+<p class="t_title">
+You have a closer look at it, and it is locked. <br>
+It is highly possible that the key is somewhere in this room.<br>
+And you start to look around, which item would you like to have a look?<br>
+<br>
+a. In the TV stand<br>
+b. Under the sofa<br>
+c. Under the carpet<br>
+d. Inside the plant<br>
+
+<br>
+</p>
+
+
+{% endblock %}
+
+
+
+
+{% block continue %}
+
+<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+{% endblock %}

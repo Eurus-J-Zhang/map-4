@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block script %}
+<script>
+    function fn1(){
+        window.location="p_emo1";
+    }
+</script>
+ {% endblock %}
+
+
+
+{% block main_text %}
+
+<p class="t_title">
+
+    The lock opens successfully!
+
+<br>
+</p>
+
+
+{% endblock %}
+
+
+
+
+{% block continue %}
+
+<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+{% endblock %}

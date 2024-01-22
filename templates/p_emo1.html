@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title_text %}
-
-{% endblock %}
 
 {% block main_text %}
 <p class="t_title">
-  Please again use the following words to access your current emotional state.
+  
+
+
+  How well do the following emotion words describe your current emotional state?
 
 </p>
 
@@ -37,32 +37,38 @@
       </tr>
       <tr>
 
-          <td>{{ form.emo2_happiness.label }}</td>
-          {% for subfield in form.emo2_happiness %}
+          <td>{{ form.emo1_happiness.label }}</td>
+          {% for subfield in form.emo1_happiness %}
           <td><div class="radio-button">{{ subfield }}</div></td>
           {% endfor %}
       </tr>
       <tr>
-        <td>{{ form.emo2_joy.label }}</td>
-        {% for subfield in form.emo2_joy %}
+        <td>{{ form.emo1_joy.label }}</td>
+        {% for subfield in form.emo1_joy %}
         <td><div class="radio-button">{{ subfield }}</div></td>
         {% endfor %}
     </tr>
     <tr>
-        <td>{{ form.emo2_boredom.label }}</td>
-        {% for subfield in form.emo2_boredom %}
+        <td>{{ form.emo1_despair.label }}</td>
+        {% for subfield in form.emo1_despair %}
         <td><div class="radio-button">{{ subfield }}</div></td>
         {% endfor %}
     </tr>
       <tr>
-          <td>{{ form.emo2_sadness.label }}</td>
-          {% for subfield in form.emo2_sadness %}
+          <td>{{ form.emo1_sadness.label }}</td>
+          {% for subfield in form.emo1_sadness %}
           <td><div class="radio-button">{{ subfield }}</div></td>
           {% endfor %}
       </tr>
       <tr>
-        <td>{{ form.emo2_irritation.label }}</td>
-        {% for subfield in form.emo2_irritation %}
+        <td>{{ form.emo1_irritation.label }}</td>
+        {% for subfield in form.emo1_irritation %}
+        <td><div class="radio-button">{{ subfield }}</div></td>
+        {% endfor %}
+      </tr>
+      <tr>
+        <td>{{ form.emo1_rage.label }}</td>
+        {% for subfield in form.emo1_rage %}
         <td><div class="radio-button">{{ subfield }}</div></td>
         {% endfor %}
     </tr>
@@ -73,3 +79,4 @@
 </form>
 
 {% endblock %}
+
