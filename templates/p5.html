@@ -1,39 +1,57 @@
 {% extends 'base.html' %}
 
-
 {% block script %}
 <script>
-    function fn1(){
-        window.location="p6";
+    function fn1() {
+        var choices = document.getElementsByName('slotChoice');
+        var selectedChoice;
+        for (var i = 0; i < choices.length; i++) {
+            if (choices[i].checked) {
+                selectedChoice = choices[i].value;
+                break;
+            }
+        }
+        // Redirect based on the selected choice
+        switch (selectedChoice) {
+            case 'a':
+                window.location.href = 'r_wrong'; // Update this with the actual path
+                break;
+            case 'b':
+                window.location.href = 'r_correct'; // Update this with the actual path
+                break;
+            case 'c':
+                window.location.href = 'r_wrong'; // Update this with the actual path
+                break;
+            default:
+                alert('Please select a slot.');
+                break;
+        }
     }
 </script>
- {% endblock %}
-
-
+{% endblock %}
 
 {% block main_text %}
-
 <p class="t_title">
 You put the key into the hidden door, and it opens. <br>
 Now you are in the hidden office, there is a big safe box on the wall, <br>
 there are three slots, and you only have one chance, if the wrong one is chosen, <br>
 the alarm would ring and the task would fail. <br>
-with the key in your hand, which slot would you choose?<br>
+With the key in your hand, which slot would you choose?<br>
 <br>
-a. the round one<br>
-b. the triangle one<br>
-c. the square one<br>
-
+<form id="slotChoiceForm">
+    <input type="radio" id="roundSlot" name="slotChoice" value="a">
+    <label for="roundSlot">A. the round one</label><br>
+    
+    <input type="radio" id="triangleSlot" name="slotChoice" value="b">
+    <label for="triangleSlot">B. the triangle one</label><br>
+    
+    <input type="radio" id="squareSlot" name="slotChoice" value="c">
+    <label for="squareSlot">C. the square one</label><br>
+</form>
 <br>
 </p>
-
-
 {% endblock %}
 
-
-
-
 {% block continue %}
-
-<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+<button onclick="fn1()" id="btn1" class="continue-btn">Continue</button>
 {% endblock %}

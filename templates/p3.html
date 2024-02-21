@@ -1,38 +1,78 @@
 {% extends 'base.html' %}
-
-
 {% block script %}
 <script>
-    function fn1(){
-        window.location="p4";
+    function fn1() {
+        // Initialize or retrieve the counter from localStorage
+        var attempts = parseInt(localStorage.getItem('attempts') || '0');
+
+        // Increment and save the attempts counter
+        attempts++;
+        localStorage.setItem('attempts', attempts.toString());
+
+        var choices = document.getElementsByName('itemChoice');
+        var selectedChoice;
+        for (var i = 0; i < choices.length; i++) {
+            if (choices[i].checked) {
+                selectedChoice = choices[i].value;
+                break;
+            }
+        }
+
+        // Determine the redirection based on the attempt
+        if (attempts < 3) {
+            // If it's not the third attempt, reload the page for another try
+            alert('Nothing there:( Let us try another location.');
+            window.location.href = ''; // Reload the current page
+        } else {
+            // On the third attempt, redirect based on the selected choice
+            switch (selectedChoice) {
+                case 'a':
+                    window.location.href = 'livingroomA';
+                    break;
+                case 'b':
+                    window.location.href = 'livingroomB';
+                    break;
+                case 'c':
+                    window.location.href = 'livingroomC';
+                    break;
+                case 'd':
+                    window.location.href = 'livingroomD';
+                    break;
+                default:
+                    alert('Please select an option.');
+                    break;
+            }
+            // Reset the attempts counter for future tries
+            localStorage.removeItem('attempts');
+        }
     }
 </script>
- {% endblock %}
-
-
-
-{% block main_text %}
-
-<p class="t_title">
-You have a closer look at it, and it is locked. <br>
-It is highly possible that the key is somewhere in this room.<br>
-And you start to look around, which item would you like to have a look?<br>
-<br>
-a. In the TV stand<br>
-b. Under the sofa<br>
-c. Under the carpet<br>
-d. Inside the plant<br>
-
-<br>
-</p>
-
-
 {% endblock %}
 
 
-
+{% block main_text %}
+<p class="t_title">
+    You have a closer look at it, and it is locked. <br>
+    It is highly possible that the key is somewhere in this room.<br>
+    And you start to look around, which item would you like to have a look?<br>
+    <br>
+    <form id="itemSearchForm">
+        <input type="radio" id="tvStand" name="itemChoice" value="a">
+        <label for="tvStand">A. In the TV stand</label><br>
+        
+        <input type="radio" id="underSofa" name="itemChoice" value="b">
+        <label for="underSofa">B. Under the sofa</label><br>
+        
+        <input type="radio" id="underCarpet" name="itemChoice" value="c">
+        <label for="underCarpet">C. Under the carpet</label><br>
+        
+        <input type="radio" id="insidePlant" name="itemChoice" value="d">
+        <label for="insidePlant">D. Inside the plant</label><br>
+    </form>
+    <br>
+</p>
+{% endblock %}
 
 {% block continue %}
-
-<button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
+<button onclick="fn1()" id="btn1" class="continue-btn">Continue</button>
 {% endblock %}

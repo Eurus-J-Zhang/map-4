@@ -97,11 +97,38 @@ def p4():
 def p5():
     return render_template('p5.html')
 
-# P6
-@app.route('/p6')
-def p6():
-    return render_template('p6.html')
 
+
+# livingroomA
+@app.route('/livingroomA')
+def livingroomA():
+    return render_template('livingroomA.html')
+
+
+# livingroomB
+@app.route('/livingroomB')
+def livingroomB():
+    return render_template('livingroomB.html')
+
+# livingroomC
+@app.route('/livingroomC')
+def livingroomC():
+    return render_template('livingroomC.html')
+
+# livingroomD
+@app.route('/livingroomD')
+def livingroomD():
+    return render_template('livingroomD.html')
+
+# r_correct
+@app.route('/r_correct')
+def r_correct():
+    return render_template('r_correct.html')
+
+# P6
+@app.route('/r_wrong')
+def r_wrong():
+    return render_template('r_wrong.html')
 
 
 # end page

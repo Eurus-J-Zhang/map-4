@@ -4,7 +4,7 @@
 {% block script %}
 <script>
     function fn1(){
-        window.location="p3";
+        window.location="p5";
     }
 </script>
  {% endblock %}
@@ -14,12 +14,11 @@
 {% block main_text %}
 
 <p class="t_title">
-You managed to break into the house, now you are in the living room. <br>
-You are looking around. Nothing interesting, but you noticed that there is a hidden door.
-
+There is something funny in the plant, you take it out, and it is the key!
 <br><br>
+<img src="{{ url_for('static', filename='img/plant.jpg') }}" alt="Example Image"  width="300" >
 
-<img src="{{ url_for('static', filename='img/living_room.jpg') }}" alt="Example Image"  width="300" >
+<br>
 </p>
 
 
