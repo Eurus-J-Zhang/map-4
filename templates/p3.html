@@ -56,6 +56,9 @@
     It is highly possible that the key is somewhere in this room.<br>
     And you start to look around, which item would you like to have a look?<br>
     <br>
+    <img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="500" >
+</p>
+    
     <form id="itemSearchForm">
         <input type="radio" id="tvStand" name="itemChoice" value="a">
         <label for="tvStand">A. In the TV stand</label><br>
@@ -69,7 +72,7 @@
         <input type="radio" id="insidePlant" name="itemChoice" value="d">
         <label for="insidePlant">D. Inside the plant</label><br>
     </form>
-    <br>
+
 </p>
 {% endblock %}
 

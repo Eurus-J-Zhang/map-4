@@ -15,12 +15,20 @@
 
 <br>
 
-    You are a very hardworking theif, before the mission started, 
-    you did your homework about the safe box of the owner. 
-    <br>
-    And you learnt that, if it is a box with multiple lock hole, the traingle hole has the biggest posibility to be opened. 
-    <br>
-    And it looks like:
+
+You've been closely observing the targeted residence for some time now. 
+Prior to making your move, you've gathered crucial intelligence regarding 
+the homeowner and their safe.
+<br>
+<br>
+The homeowner harbors a profound affinity for triangular shapes, attributing 
+to them a significant religious importance. Consequently, should the safe 
+feature several lock openings, the triangular one is most likely the correct choice 
+for access. Attempting to use the other openings is fraught with risk, as it may 
+activate the alarm system.
+
+The lock opening is designed as follows:
+<br>
     <br>
     <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" height="200">
 
@@ -33,6 +41,6 @@
 {% endblock %}
 
 {% block continue %}
-
+<br>
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}

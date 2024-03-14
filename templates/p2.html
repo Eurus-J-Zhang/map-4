@@ -14,12 +14,14 @@
 {% block main_text %}
 
 <p class="t_title">
-You managed to break into the house, now you are in the living room. <br>
-You are looking around. Nothing interesting, but you noticed that there is a hidden door.
+You manage to break into the house without being noticed, 
+now you are in the living room. <br>
+
+You look around. Nothing interesting, but you notice that there is a hidden door.
 
 <br><br>
 
-<img src="{{ url_for('static', filename='img/living_room.jpg') }}" alt="Example Image"  width="300" >
+<img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="500" >
 </p>
 
 
@@ -29,6 +31,6 @@ You are looking around. Nothing interesting, but you noticed that there is a hid
 
 
 {% block continue %}
-
+<br>
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}
