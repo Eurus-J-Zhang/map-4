@@ -7,17 +7,25 @@
         {% block script %}{% endblock %}
     </head>
     <body>     
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p id="modalText">Some text in the Modal..</p>
+              <button id="modalContinue" style="display:none;">Continue</button>
+            </div>
+          </div>
+          
+
         <div class="grid-parent">
 
-            <div class = "instruction"> 
+            <!-- <div class = "instruction"> 
                 {% block title_text %}{% endblock %}
-            </div>
+            </div> -->
             <div class = "story"> 
                 {% block main_text %}{% endblock %}
             </div>
-            <!-- <div class = "result"> 
-                {% block result %}{% endblock %}
-            </div> -->
+
             <div class = "continue">   
                 {% block continue %}{% endblock %}
             </div>

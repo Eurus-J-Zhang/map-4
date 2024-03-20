@@ -14,14 +14,14 @@
 {% block main_text %}
 
 <p class="t_title">
-You manage to break into the house without being noticed, 
-now you are in the living room. <br>
 
-You look around. Nothing interesting, but you notice that there is a hidden door.
+    You successfully slip into the house unnoticed and find yourself in the living room. 
+    Upon looking around, you see nothing of immediate interest, but your attention is drawn to a closed door. 
+    You suspect that beyond this door lies another room, where the safe box is located.
 
 <br><br>
 
-<img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="500" >
+<img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image" style="width: 100%;">
 </p>
 
 
@@ -31,6 +31,5 @@ You look around. Nothing interesting, but you notice that there is a hidden door
 
 
 {% block continue %}
-<br>
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}

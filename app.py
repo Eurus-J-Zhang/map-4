@@ -92,6 +92,11 @@ def p3():
 def p4():
     return render_template('p4.html')
 
+# P4
+@app.route('/p4_office')
+def p4_office():
+    return render_template('p4_office.html')
+
 # P5
 @app.route('/p5')
 def p5():
@@ -125,7 +130,7 @@ def livingroomD():
 def r_correct():
     return render_template('r_correct.html')
 
-# P6
+# r_wrong
 @app.route('/r_wrong')
 def r_wrong():
     return render_template('r_wrong.html')

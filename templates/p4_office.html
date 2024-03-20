@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block script %}
+<script>
+    function fn1() {
+        var choices = document.getElementsByName('slotChoice');
+        var selectedChoice;
+        for (var i = 0; i < choices.length; i++) {
+            if (choices[i].checked) {
+                selectedChoice = choices[i].value;
+                break;
+            }
+        }
+        // Redirect based on the selected choice
+        switch (selectedChoice) {
+            case 'a':
+                window.location.href = 'p4'; // Update this with the actual path
+                break;
+            case 'b':
+                window.location.href = 'p4'; // Update this with the actual path
+                break;
+            case 'c':
+                window.location.href = 'p4'; // Update this with the actual path
+                break;
+            default:
+                alert('Please select a slot.');
+                break;
+        }
+    }
+</script>
+{% endblock %}
+
+{% block main_text %}
+<p class="t_title">
+    Inserting the key into the lock, the door swings open, granting you access to the office. 
+    <br>
+    Inside, a large safe box is mounted on the wall. You make your way toward the door...  <br>
+
+<br>
+<img src="{{ url_for('static', filename='img/office.jpg') }}" alt="Example Image"  style="width: 100%;">
+<form id="slotChoiceForm">
+    <input type="radio" id="roundSlot" name="slotChoice" value="a">
+    <label for="roundSlot">A. as quitely as you can.
+    </label><br>
+    
+    <input type="radio" id="triangleSlot" name="slotChoice" value="b">
+    <label for="triangleSlot">B. as quickly as you can.
+
+    </label><br>
+    
+    <input type="radio" id="squareSlot" name="slotChoice" value="c">
+    <label for="squareSlot">C. as slowly as you can.
+
+    </label><br>
+</form>
+<br>
+</p>
+{% endblock %}
+
+{% block continue %}
+<button onclick="fn1()" id="btn1" class="continue-btn">Continue</button>
+{% endblock %}

@@ -1,76 +1,116 @@
 {% extends 'base.html' %}
 {% block script %}
 <script>
-    function fn1() {
-        // Initialize or retrieve the counter from localStorage
-        var attempts = parseInt(localStorage.getItem('attempts') || '0');
-
-        // Increment and save the attempts counter
-        attempts++;
-        localStorage.setItem('attempts', attempts.toString());
-
-        var choices = document.getElementsByName('itemChoice');
-        var selectedChoice;
-        for (var i = 0; i < choices.length; i++) {
-            if (choices[i].checked) {
-                selectedChoice = choices[i].value;
-                break;
+    document.addEventListener("DOMContentLoaded", function() {
+        function fn1() {
+            var choices = document.getElementsByName('itemChoice');
+            var selectedChoice = null;
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    selectedChoice = choices[i].value;
+                    break;
+                }
+            }
+    
+            if (selectedChoice === null) {
+                showModal('Please select an option.');
+                return; // Exit the function early
+            }
+    
+            var attempts = JSON.parse(localStorage.getItem('attempts') || '[]');
+            
+            // Add the selected choice if it's not already in the attempts array
+            if (!attempts.includes(selectedChoice)) {
+                attempts.push(selectedChoice);
+                localStorage.setItem('attempts', JSON.stringify(attempts));
+            }
+    
+            function handleAttemptCompletion() {
+                var choiceMessages = {
+                    'a': 'the TV stand',
+                    'b': 'the sofa',
+                    'c': 'the carpet',
+                    'd': 'the plant'
+                };
+    
+                if (attempts.length >= 3) {
+                    // Now we redirect based on the last choice made
+                    var lastChoice = attempts[attempts.length - 1];
+                    switch (lastChoice) {
+                        case 'a': window.location.href = 'livingroomA'; break;
+                        case 'b': window.location.href = 'livingroomB'; break;
+                        case 'c': window.location.href = 'livingroomC'; break;
+                        case 'd': window.location.href = 'livingroomD'; break;
+                        default: showModal('Please select an option.'); break;
+                    }
+                    localStorage.removeItem('attempts');
+                } else {
+                    var locationMessage = choiceMessages[selectedChoice] || "a location";
+                    showModal(`You have looked up into ${locationMessage}, but nothing is there. Let's try another location.`);
+                }
+            }
+    
+            handleAttemptCompletion();
+        }
+    
+        function showModal(message) {
+            var modalText = document.getElementById('modalText');
+            var myModal = document.getElementById('myModal');
+            if(modalText && myModal) {
+                modalText.textContent = message;
+                myModal.style.display = "block";
             }
         }
-
-        // Determine the redirection based on the attempt
-        if (attempts < 3) {
-            // If it's not the third attempt, reload the page for another try
-            alert('Nothing there:( Let us try another location.');
-            window.location.href = ''; // Reload the current page
-        } else {
-            // On the third attempt, redirect based on the selected choice
-            switch (selectedChoice) {
-                case 'a':
-                    window.location.href = 'livingroomA';
-                    break;
-                case 'b':
-                    window.location.href = 'livingroomB';
-                    break;
-                case 'c':
-                    window.location.href = 'livingroomC';
-                    break;
-                case 'd':
-                    window.location.href = 'livingroomD';
-                    break;
-                default:
-                    alert('Please select an option.');
-                    break;
-            }
-            // Reset the attempts counter for future tries
-            localStorage.removeItem('attempts');
+    
+        // Set up close functionality
+        var closeButton = document.getElementsByClassName("close")[0];
+        var myModal = document.getElementById('myModal');
+        if(closeButton && myModal) {
+            closeButton.onclick = function() {
+                myModal.style.display = "none";
+            };
+            window.onclick = function(event) {
+                if (event.target == myModal) {
+                    myModal.style.display = "none";
+                }
+            };
         }
-    }
+    
+        // Bind the fn1 function to the continue button click event
+        document.getElementById('btn1').addEventListener('click', fn1);
+    });
 </script>
 {% endblock %}
 
 
+
+
 {% block main_text %}
 <p class="t_title">
-    You have a closer look at it, and it is locked. <br>
+    You examine the door more closely and find it's locked. 
+    The key must be somewhere in this room. 
+    With that thought, you begin to survey the surroundings. 
+    Which item catches your eye first for a closer inspection?
+    <!-- You have a closer look at it, and it is locked. <br>
     It is highly possible that the key is somewhere in this room.<br>
-    And you start to look around, which item would you like to have a look?<br>
+    And you start to look around, which item would you like to have a look?<br> -->
     <br>
-    <img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="500" >
+    <br>
+    <img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="100%;" >
 </p>
     
     <form id="itemSearchForm">
         <input type="radio" id="tvStand" name="itemChoice" value="a">
-        <label for="tvStand">A. In the TV stand</label><br>
+        <label for="tvStand">A. The TV stand</label><br>
         
         <input type="radio" id="underSofa" name="itemChoice" value="b">
-        <label for="underSofa">B. Under the sofa</label><br>
+        <label for="underSofa">B. The sofa</label><br>
         
         <input type="radio" id="underCarpet" name="itemChoice" value="c">
-        <label for="underCarpet">C. Under the carpet</label><br>
+        <label for="underCarpet">C. The carpet</label><br>
         
         <input type="radio" id="insidePlant" name="itemChoice" value="d">
-        <label for="insidePlant">D. Inside the plant</label><br>
+        <label for="insidePlant">D. The plant</label><br>
     </form>
 
 </p>

@@ -13,25 +13,24 @@
 
 <p class="t_title">
 
-<br>
-
 
 You've been closely observing the targeted residence for some time now. 
 Prior to making your move, you've gathered crucial intelligence regarding 
-the homeowner and their safe.
+the homeowner and their safe, where the treasure is located. 
 <br>
 <br>
-The homeowner harbors a profound affinity for triangular shapes, attributing 
+The homeowner has a profound affection for triangular shapes, attributing 
 to them a significant religious importance. Consequently, should the safe 
 feature several lock openings, the triangular one is most likely the correct choice 
-for access. Attempting to use the other openings is fraught with risk, as it may 
+for access. Attempting to use the other openings is extremely risky, as it will 
 activate the alarm system.
 
 The lock opening is designed as follows:
 <br>
     <br>
-    <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" height="200">
-
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image" style="width: 200px; height: 200px;">
+    </div>
     <br><br>
 
     You kept this information at heart, and now you're about to start your journey...
@@ -41,6 +40,6 @@ The lock opening is designed as follows:
 {% endblock %}
 
 {% block continue %}
-<br>
+
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}
