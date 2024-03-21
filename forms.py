@@ -19,6 +19,7 @@ class EmotionForm1(FlaskForm):
     emo1_sadness = RadioField('Sadness', choices=eleven_point_scale, validators=[DataRequired()])
     emo1_irritation = RadioField('Irritation', choices=eleven_point_scale, validators=[DataRequired()]) 
     emo1_rage = RadioField('Rage', choices=eleven_point_scale, validators=[DataRequired()])  
+    emo1_confusion = RadioField('Confusion', choices=eleven_point_scale, validators=[DataRequired()])  
     
   
 # Feedback collecting 

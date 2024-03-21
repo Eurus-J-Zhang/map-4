@@ -1,37 +1,25 @@
 {% extends 'base.html' %}
 
-
 {% block script %}
 <script>
     function fn1(){
         window.location="p4_office";
     }
 </script>
- {% endblock %}
-
-
+{% endblock %}
 
 {% block main_text %}
 
 <p class="t_title">
 
 There is something funny under the sofa, you take it out, and it is the key! 
-<br>
-<br>
+<br><br>
 <img src="{{ url_for('static', filename='img/B_key.jpg') }}" alt="Example Image" style="width: 100%;">
 </p>
-
-</p>
 <br>
-
-
 
 {% endblock %}
 
-
-
-
 {% block continue %}
-
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}

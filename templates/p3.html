@@ -75,15 +75,11 @@
                 }
             };
         }
-    
         // Bind the fn1 function to the continue button click event
         document.getElementById('btn1').addEventListener('click', fn1);
     });
 </script>
 {% endblock %}
-
-
-
 
 {% block main_text %}
 <p class="t_title">
@@ -91,11 +87,7 @@
     The key must be somewhere in this room. 
     With that thought, you begin to survey the surroundings. 
     Which item catches your eye first for a closer inspection?
-    <!-- You have a closer look at it, and it is locked. <br>
-    It is highly possible that the key is somewhere in this room.<br>
-    And you start to look around, which item would you like to have a look?<br> -->
-    <br>
-    <br>
+    <br><br>
     <img src="{{ url_for('static', filename='img/livingroom.jpg') }}" alt="Example Image"  width="100%;" >
 </p>
     

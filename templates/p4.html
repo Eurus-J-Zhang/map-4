@@ -1,71 +1,40 @@
 {% extends 'base.html' %}
 
-{% block script %}
-<script>
-    function fn1() {
-        var choices = document.getElementsByName('slotChoice');
-        var selectedChoice;
-        for (var i = 0; i < choices.length; i++) {
-            if (choices[i].checked) {
-                selectedChoice = choices[i].value;
-                break;
-            }
-        }
-        // Redirect based on the selected choice
-        switch (selectedChoice) {
-            case 'a':
-                window.location.href = 'r_wrong'; // Update this with the actual path
-                break;
-            case 'b':
-                window.location.href = 'r_correct'; // Update this with the actual path
-                break;
-            case 'c':
-                window.location.href = 'r_wrong'; // Update this with the actual path
-                break;
-            default:
-                alert('Please select a slot.');
-                break;
-        }
-    }
-</script>
-{% endblock %}
 
 {% block main_text %}
-<p class="t_title">
-<!-- Now you're trying to open the safe box. 
-there are three slots, and you only have one chance, if the wrong one is chosen,
-the alarm would ring and the task would fail. <br>
-With the key in your hand, which slot would you choose?<br> -->
 
-Now you're standing before a safe box, poised to unlock its secrets. 
+{% if error %}
+<div style="color: red; margin-bottom: 20px;">{{ error }}</div>
+
+{% endif %}
+<p class="t_title">
+
+Now Alex, you're standing before the safe box, poised to unlock its secrets. 
 Before you are three distinct slots, each leading to potential success or immediate failure. 
 The stakes are high: a single incorrect choice will trigger an alarm, 
 sealing the safe's contents away and marking the end of your quest. 
 With the key in hand and fate hanging in the balance, which slot do you commit to?
 <br>
-<form id="slotChoiceForm">
-    <input type="radio" id="roundSlot" name="slotChoice" value="a">
-    <label for="roundSlot">A. the round one
-        <br>
-        <img src="{{ url_for('static', filename='img/round.jpg') }}" alt="Example Image"  width="200" >
-    </label><br>
+</p>
+
+<form method="POST">
+<!-- <form id="slotChoiceForm"> -->
+    <input type="radio" id="roundSlot" name="slotChoice" value="A">
+    <label for="roundSlot">A. the round one</label><br>
+    <img src="{{ url_for('static', filename='img/round.jpg') }}" alt="Example Image"  width="200" >
+    <br>
     
-    <input type="radio" id="triangleSlot" name="slotChoice" value="b">
-    <label for="triangleSlot">B. the triangle one
-        <br>
-        <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" >
-    </label><br>
+    <input type="radio" id="triangleSlot" name="slotChoice" value="B">
+    <label for="triangleSlot">B. the triangle one</label><br>
+    <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" >
+    <br>
     
-    <input type="radio" id="squareSlot" name="slotChoice" value="c">
-    <label for="squareSlot">C. the square one
-        <br>
-        <img src="{{ url_for('static', filename='img/square.jpg') }}" alt="Example Image"  width="200" >
-    </label><br>
+    <input type="radio" id="squareSlot" name="slotChoice" value="C">
+    <label for="squareSlot">C. the square one</label><br>
+    <img src="{{ url_for('static', filename='img/square.jpg') }}" alt="Example Image"  width="200" >
+    <br>
+    <input type="submit" value="Continue" class="continue-btn">
 </form>
 <br>
-</p>
-{% endblock %}
 
-{% block continue %}
-<button onclick="fn1()" id="btn1" class="continue-btn">Continue</button>
 {% endblock %}

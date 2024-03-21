@@ -13,8 +13,8 @@ pymysql.install_as_MySQLdb()
 
 def create_app():
     app = Flask(__name__)
-    # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('JAWSDB_URL')
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     app.config['SECRET_KEY'] = "iloveeurus"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -44,6 +44,25 @@ def index():
         return redirect(url_for('p1'))
     return render_template('index.html',form=form)
 
+
+
+
+@app.route('/p4', methods=['GET', 'POST'])
+def handle_form():
+    if request.method == 'POST':
+        slot_choice = request.form.get('slotChoice')
+        session['final_choice'] = slot_choice
+        # return redirect(url_for('r_correct'))
+        if slot_choice == 'B':
+            return redirect(url_for('r_correct'))  # Redirect to the correct page
+        elif slot_choice in ('A', 'C'):
+            return redirect(url_for('r_wrong'))
+        else:
+            return render_template('p4.html', error='Please select an option.')
+            # return redirect(url_for('r_wrong'))  # Redirect to the wrong page
+    return render_template('p4.html')
+
+
 @app.route('/p_emo1', methods=['GET', 'POST'])
 def emo1():
     form = EmotionForm1()
@@ -59,10 +78,11 @@ def emo_end():
     result = handle_form_submission(form, 'emo_add_data', 'page_end')
     if result:
         index_data = session.get('index_data')
+        final_choice = session.get('final_choice')
         emo1_data = session.get('emo1_data')
         emo_add_data = session.get('emo_add_data')
         
-        combined_data = {**index_data, **emo1_data, **emo_add_data}
+        combined_data = {**index_data, 'final_choice': final_choice, **emo1_data, **emo_add_data}
         data = Data(**combined_data)
         db.session.add(data)
         db.session.commit()
@@ -88,20 +108,9 @@ def p3():
     return render_template('p3.html')
 
 # P4
-@app.route('/p4')
-def p4():
-    return render_template('p4.html')
-
-# P4
 @app.route('/p4_office')
 def p4_office():
     return render_template('p4_office.html')
-
-# P5
-@app.route('/p5')
-def p5():
-    return render_template('p5.html')
-
 
 
 # livingroomA
