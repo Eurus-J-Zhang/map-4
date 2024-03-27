@@ -12,7 +12,7 @@ class DemographicInfo(FlaskForm):
 eleven_point_scale = [(str(i), f'Opt{i}') for i in range(11)]
 
 # Here is the first emotion check
-class EmotionForm1(FlaskForm):
+class EmotionForm(FlaskForm):
     emo1_happiness = RadioField('Happiness', choices=eleven_point_scale, validators=[DataRequired()])
     emo1_joy = RadioField('Joy', choices=eleven_point_scale, validators=[DataRequired()])
     emo1_despair = RadioField('Despair', choices=eleven_point_scale, validators=[DataRequired()])
@@ -21,7 +21,4 @@ class EmotionForm1(FlaskForm):
     emo1_rage = RadioField('Rage', choices=eleven_point_scale, validators=[DataRequired()])  
     emo1_confusion = RadioField('Confusion', choices=eleven_point_scale, validators=[DataRequired()])  
     
-  
-# Feedback collecting 
-class FeedbackForm(FlaskForm):
     feedback = StringField('',validators=[DataRequired()],widget=TextArea())

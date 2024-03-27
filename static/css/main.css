@@ -48,6 +48,10 @@ form {
     height: 25px;
 }
 
+.t_title {
+    line-height: 1.2; /* This sets the line height as 1.5 times the current font size */
+}
+
 #result{
     padding: 10px;
     text-align: center;

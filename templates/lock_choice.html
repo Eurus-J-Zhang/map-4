@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{% block script %}
+<script>
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null }; 
+</script>
+{% endblock %}
 
 {% block main_text %}
 

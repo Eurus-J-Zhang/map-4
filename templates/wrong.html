@@ -2,14 +2,15 @@
 
 {% block script %}
 <script>
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1);
-    };
     
     function fn1(){
-        window.location="p_emo1";
+        window.location="emo";
     }
+
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null }; 
+
 </script>
  {% endblock %}
 
