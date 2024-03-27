@@ -44,32 +44,33 @@ def index():
         return redirect(url_for('p1'))
     return render_template('index.html',form=form)
 
-
-
-
 @app.route('/p4', methods=['GET', 'POST'])
 def handle_form():
     if request.method == 'POST':
         slot_choice = request.form.get('slotChoice')
         session['final_choice'] = slot_choice
-        # return redirect(url_for('r_correct'))
         if slot_choice == 'B':
             return redirect(url_for('r_correct'))  # Redirect to the correct page
         elif slot_choice in ('A', 'C'):
-            return redirect(url_for('r_wrong'))
+            return redirect(url_for('r_wrong')) # Redirect to the wrong page
         else:
-            return render_template('p4.html', error='Please select an option.')
-            # return redirect(url_for('r_wrong'))  # Redirect to the wrong page
+            return render_template('p4.html', error='Please select an option.') 
     return render_template('p4.html')
 
 
 @app.route('/p_emo1', methods=['GET', 'POST'])
 def emo1():
+    final_choice = session.get('final_choice', None)
+    content = {
+    'B': {'image_path': 'static/img/ring.jpg'},
+    'A_C': {'image_path': 'static/img/alarm.jpg'}
+    }
+    chosen_content = content['B'] if final_choice == 'B' else content['A_C']
     form = EmotionForm1()
     result = handle_form_submission(form, 'emo1_data', 'p_emo2')
     if result:
         return result
-    return render_template('p_emo1.html',form=form)
+    return render_template('p_emo1.html',form=form,chosen_content=chosen_content)
 
 
 @app.route('/p_emo2', methods=['GET', 'POST'])
@@ -89,7 +90,6 @@ def emo_end():
 
         return result
     return render_template('p_emo2.html',form=form)
-
 
 
 # P1
