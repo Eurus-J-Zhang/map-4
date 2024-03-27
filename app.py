@@ -72,7 +72,6 @@ def emo1():
         return result
     return render_template('p_emo1.html',form=form,chosen_content=chosen_content)
 
-
 @app.route('/p_emo2', methods=['GET', 'POST'])
 def emo_end():
     form = FeedbackForm()

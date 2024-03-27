@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 
+{% block script %}
+<script>
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+</script>
+{% endblock %}
+
 
 {% block main_text %}
 <p class="t_title">
-  As the character Alex in this adventure, we invite you to rate your emotional experience at this moment:
+  As Alex on this captivating journey, we'd love for you to share with us 
+  how you're feeling right now. Please take a moment to reflect on 
+  your emotional experience, and rate them accordingly:
+
 
 </p>
 
