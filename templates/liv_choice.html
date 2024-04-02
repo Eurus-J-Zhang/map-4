@@ -27,10 +27,10 @@
     
             function handleAttemptCompletion() {
                 var choiceMessages = {
-                    'a': 'the TV stand',
-                    'b': 'the sofa',
-                    'c': 'the carpet',
-                    'd': 'the plant'
+                    'a': 'Nothing interesting in the TV stand... want to try something else?',
+                    'b': 'You have looked up into the bookshelf, but you did not find anything:( Let us try another location.',
+                    'c': 'Did not find anything in the carpet, let us try another place.',
+                    'd': 'You got your hands dirty but there is nothing in the plant... maybe give somewhere else another try.'
                 };
     
                 if (attempts.length >= 3) {
@@ -46,7 +46,7 @@
                     localStorage.removeItem('attempts');
                 } else {
                     var locationMessage = choiceMessages[selectedChoice] || "a location";
-                    showModal(`You have looked up into ${locationMessage}, but nothing is there. Let's try another location.`);
+                    showModal(`${locationMessage}`);
                 }
             }
     
@@ -96,7 +96,7 @@
         <label for="tvStand">A. The TV stand</label><br>
         
         <input type="radio" id="underSofa" name="itemChoice" value="b">
-        <label for="underSofa">B. The sofa</label><br>
+        <label for="underSofa">B. The bookshelf</label><br>
         
         <input type="radio" id="underCarpet" name="itemChoice" value="c">
         <label for="underCarpet">C. The carpet</label><br>
