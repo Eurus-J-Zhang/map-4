@@ -18,4 +18,4 @@ class Data(db.Model):
     emo1_rage = db.Column(db.Integer)
     emo1_confusion = db.Column(db.Integer)
 
-    feedback = db.Column(db.String(400))
+    feedback = db.Column(db.String(600))
