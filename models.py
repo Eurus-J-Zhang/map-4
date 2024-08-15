@@ -16,6 +16,6 @@ class Data(db.Model):
     emo1_sadness = db.Column(db.Integer)
     emo1_irritation = db.Column(db.Integer)
     emo1_rage = db.Column(db.Integer)
-    emo1_confusion = db.Column(db.Integer)
+    # emo1_confusion = db.Column(db.Integer)
 
-    feedback = db.Column(db.String(600))
+    feedback = db.Column(db.String(1000))
