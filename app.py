@@ -38,7 +38,7 @@ def index():
         data.pop('csrf_token', None)
         session['index_data'] = data
         session['counter'] = 0
-        return redirect(url_for('lock_info'))
+        return redirect(url_for('page1'))
     return render_template('index.html',form=form)
 
 @app.route('/lock_choice', methods=['GET', 'POST'])
@@ -46,9 +46,9 @@ def handle_form():
     if request.method == 'POST':
         slot_choice = request.form.get('slotChoice')
         session['final_choice'] = slot_choice
-        if slot_choice == 'B':
+        if slot_choice == 'A':
             return redirect(url_for('correct'))  # Redirect to the correct page
-        elif slot_choice in ('A', 'C'):
+        elif slot_choice in ('B', 'C'):
             return redirect(url_for('wrong')) # Redirect to the wrong page
         else:
             return render_template('p4.html', error='Please select an option.') 
@@ -80,46 +80,19 @@ def emo():
 
 
 # P1
-@app.route('/lock_info')
-def lock_info():
-    return render_template('lock_info.html')
+@app.route('/page1')
+def page1():
+    return render_template('page1.html')
 
 # P2
-@app.route('/livingroom')
-def livingroom():
-    return render_template('livingroom.html')
+@app.route('/page2')
+def page2():
+    return render_template('page2.html')
 
 # P3
-@app.route('/liv_choice')
-def liv_choice():
-    return render_template('liv_choice.html')
-
-# P4
-@app.route('/office')
-def office():
-    return render_template('office.html')
-
-
-# livingroomA
-@app.route('/livingroomA')
-def livingroomA():
-    return render_template('livingroomA.html')
-
-
-# livingroomB
-@app.route('/livingroomB')
-def livingroomB():
-    return render_template('livingroomB.html')
-
-# livingroomC
-@app.route('/livingroomC')
-def livingroomC():
-    return render_template('livingroomC.html')
-
-# livingroomD
-@app.route('/livingroomD')
-def livingroomD():
-    return render_template('livingroomD.html')
+@app.route('/page3')
+def page3():
+    return render_template('page3.html')
 
 # r_correct
 @app.route('/correct')

@@ -16,29 +16,25 @@
 {% endif %}
 <p class="t_title">
 
-Now Alex, you're standing before the safe box, poised to unlock its secrets. 
-Before you are three distinct slots, each leading to potential success or immediate failure. 
-The stakes are high: a single incorrect choice will trigger an alarm, 
-sealing the safe's contents away and marking the end of your quest. 
-With the key in hand and fate hanging in the balance, which slot do you commit to?
+What do you decide to do?
 <br>
 </p>
 
 <form method="POST">
 <!-- <form id="slotChoiceForm"> -->
     <input type="radio" id="roundSlot" name="slotChoice" value="A">
-    <label for="roundSlot">A. the round one</label><br>
-    <img src="{{ url_for('static', filename='img/round.jpg') }}" alt="Example Image"  width="200" >
+    <label for="roundSlot">A. Walk</label><br>
+    <!-- <img src="{{ url_for('static', filename='img/round.jpg') }}" alt="Example Image"  width="200" > -->
     <br>
     
     <input type="radio" id="triangleSlot" name="slotChoice" value="B">
-    <label for="triangleSlot">B. the triangle one</label><br>
-    <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" >
+    <label for="triangleSlot">B. Metro + Tram </label><br>
+    <!-- <img src="{{ url_for('static', filename='img/triangle.jpg') }}" alt="Example Image"  width="200" > -->
     <br>
     
     <input type="radio" id="squareSlot" name="slotChoice" value="C">
-    <label for="squareSlot">C. the square one</label><br>
-    <img src="{{ url_for('static', filename='img/square.jpg') }}" alt="Example Image"  width="200" >
+    <label for="squareSlot">C. placeholder</label><br>
+    <!-- <img src="{{ url_for('static', filename='img/square.jpg') }}" alt="Example Image"  width="200" > -->
     <br>
     <input type="submit" value="Continue" class="continue-btn">
 </form>

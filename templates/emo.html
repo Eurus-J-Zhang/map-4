@@ -2,11 +2,10 @@
 
 {% block main_text %}
 <div class="container">
-<img src="{{ chosen_content['image_path'] }}" alt="Result Image" style="width: 80%;">
+<!-- <img src="{{ chosen_content['image_path'] }}" alt="Result Image" style="width: 80%;"> -->
 </div><br>
 <p class="t_title">
-  As Alex on this captivating journey, we'd love for you to share with us 
-  how you're feeling right now. 
+
   <br>Please take a moment to reflect on your emotional experience, and rate them accordingly:
 
 </p>
@@ -74,10 +73,7 @@
         {% endfor %}
     </tr>
     <tr>
-      <td>{{ form.emo1_confusion.label }}</td>
-      {% for subfield in form.emo1_confusion %}
-      <td><div class="radio-button">{{ subfield }}</div></td>
-      {% endfor %}
+
   </tr>
 
   </table>
