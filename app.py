@@ -56,7 +56,7 @@ station_config = {
 }
 
 def get_action_choices(station):
-    """Return action choices based on the station, preserving the order."""
+    """Return action choices based on the station, preserving the order and handling special cases."""
     config = station_config.get(station, {})
     enabled_actions = config.get('enabled', {})
     disabled_actions = set(config.get('disabled', []))
@@ -65,6 +65,10 @@ def get_action_choices(station):
 
     # Iterate over all possible actions in the predefined order
     for action in actions.keys():
+        # Special case: only include 'g' at 'Conby Vale'
+        if action == 'g' and station != 'Conby Vale':
+            continue  # Skip 'g' if the station is not 'Conby Vale'
+        
         if action in enabled_actions:
             time = enabled_actions[action]
             time_str = f'<br>Time costs: {time} mins' if time else ''
@@ -78,6 +82,7 @@ def get_action_choices(station):
         choices.append(choice)
 
     return choices
+
 
 
 def process_action(time_cost, redirect_target):
