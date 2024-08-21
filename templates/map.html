@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block script %}
+
+<script>
+    var currentStation = "{{ station }}";
+    let currentTimeStr = "{{ current_time }}"; // Time passed from Flask, e.g., "08:32"
+
+    // Global variable to track if the second modal has been shown
+    var secondModalShown = false;
+
+    // Function to show the modal with a message
+    function showModal(message, allowClose = true) {
+        var myModal = document.getElementById('myModal');
+        var modalText = document.getElementById('modalText');
+        if (myModal && modalText) {
+            modalText.innerHTML = message; // Update the modal text
+            myModal.style.display = "block";
+
+            if (!allowClose) {
+                // Hide the close button or disable it
+                var closeButton = document.getElementsByClassName("close")[0];
+                if (closeButton) {
+                    closeButton.style.display = 'none'; // Hide close button
+                }
+
+                // Prevent modal from closing when clicking outside of it
+                window.onclick = null;
+            }
+        }
+    }
+
+    // Function to close the modal and start the timer
+    function closeModal() {
+        var myModal = document.getElementById('myModal');
+        if (myModal) {
+            myModal.style.display = "none";
+        }
+
+        // Logic to show another modal based on conditions
+        if (currentStation === 'Millstone Square' && !secondModalShown) {
+            secondModalShown = true; // Ensure this modal is shown only once
+            showModal('However, now you meet a local guide, he askes where you are going to and gives you a detailed guide.');
+        }
+    }
+
+    // Initialize the countdown timer to 90 seconds
+    let countdown = 90;
+
+    // Function to start the countdown timer
+    function startCountdown() {
+        const timerElement = document.getElementById('timer');
+
+        const countdownInterval = setInterval(function() {
+            // Update the timer display
+            timerElement.textContent = countdown;
+
+            // Decrease the countdown by one second
+            countdown--;
+
+            // If the countdown reaches zero, redirect to the fail page
+            if (countdown < 0) {
+                clearInterval(countdownInterval);
+                showModal(`You have run out of time to make an action. You will be directed to the result page in 5 seconds`, false);
+                setTimeout(function() {
+                    window.location.href = "/wrong"; // Redirect to the wrong.html page
+                }, 5000);
+            }
+        }, 1000); // Update every second
+    }
+
+    // Set up close functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        startCountdown();
+        var closeButton = document.getElementsByClassName("close")[0];
+        var myModal = document.getElementById('myModal');
+
+        if (closeButton && myModal) {
+            // Close modal when the close button is clicked, unless it's locked
+            closeButton.onclick = function() {
+                closeModal();
+            };
+
+            // Close modal when clicking outside of the modal content
+            window.onclick = function(event) {
+                if (event.target == myModal) {
+                    closeModal();
+                }
+            };
+        }
+
+        // Show the modal if the station is 'Millstone Square'
+        if (currentStation === 'Millstone Square') {
+            showModal(`However, the metro stops at Millstone Square unexpectedly, and could not continue to the 
+            direction of Perivale. <br>
+            It is due to ongoing construction at the next station Bagton Mere, with no metros able to pass through.  <br>`);
+        }
+
+        // Show the modal with no close option if the current time is >= 09:00
+        if (currentTimeStr >= "09:00") {
+            showModal('Sorry, it is already 9:00 and you have not reached your destination. You will be directed to the result page in 5 seconds.', false);
+            setTimeout(function() {
+                window.location.href = "/wrong"; // Redirect to the wrong.html page
+            }, 5000); // 5000 milliseconds = 5 seconds
+        } else if (currentStation === 'Conby Vale' && currentTimeStr <= "09:00") {
+            showModal('You have reached your destination in time! Now you can get out of the metro and finish the task.');
+        }
+    });
+</script>
+
+{% endblock %}
+
+
+{% block top_block %}
+
+Goal station:   CONBY VALE
+<br><br>
+<div>
+    Current station: <span style="border: 1px solid #000; padding: 5px; border-radius: 3px;padding-left: 3%;padding-right: 3%;">{{ station | upper }}</span>
+    <br><br>
+    Clock Time: <span style="border: 1px solid #000; padding: 5px; border-radius: 3px;padding-left: 3%;padding-right: 3%;">{{current_time}}</span>
+    <br><br>
+    Time left to make an action: 
+    <span id="timer" style="border: 1px solid #000; padding: 5px; border-radius: 3px;padding-left: 3%;padding-right: 3%;">90</span> seconds
+</div>
+{% endblock %}
+
+
+<br><br>
+
+{% block left_block %}
+
+
+
+{% if session.get('s3_visited') %}
+<p class="t_map">    
+    Guide:
+    <br><br>
+    1. Take Red Line to the direction of Fayre End.<br>
+    2. When you arrive at Grunham Holt, change to Yellow line to the direction of Cockfosters.<br>
+    3. When you arrive at Wofford Cross, change to Blue Line to the direction of Windrush Park.<br>
+    4. Then you will arrive at Conby Vale. 
+    <br><br>
+    <!-- Time costs:<br><br>
+    It takes 2 mins between each Blue Line station. <br>
+    It takes 3 mins between each Red Line station. <br>
+    It takes either 4 or 7 mins between each Yellow Line station (marked on the map). <br><br> -->
+    <span style="color: red;">Warning: </span><br>
+
+    <span style="color: red;">The station Station Bagton on Blue Line is not accessible.</span>
+
+
+</p>
+{% else %}
+<p class="t_map">    
+    Guide:
+    <br><br>
+    You are meeting your friend at Condy Vale at 9:00. 
+    However, while on the metro, your phone died, leaving you no access to the digital map that you are used to.
+    You remember that Condy Vale is on the Blue Line, 
+    and if you take the metro to the direction of Perivale, you should arrive there without any transfer. 
+    <br><br>
+
+    <!-- Time costs:<br><br>
+    It takes 2 mins between each Blue Line station. <br>
+    It takes 3 mins between each Red Line station. <br>
+    It takes either 4 or 7 mins between each Yellow Line station. <br>
+    They are shown in your options as "Time costs". -->
+</p>
+{% endif %}
+{% endblock %}
+
+{% block right_block %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <br>
+    <p class="t_map">Please select your action and continue:</p>
+    <br>
+    {% for subfield, choice in zip(form.action, choices) %}
+        <div class="radio">
+            {{ subfield(disabled=not choice[2], id=subfield.id, class_="colored-radio " + choice[0]) }}
+            <label for="{{ subfield.id }}" class="colored-label {{ choice[0] }}">
+                {{ choice[1] | safe }}
+            </label>
+        </div>
+    {% endfor %}
+
+    <br><br>
+    <p>{{ form.submit(class='continue-btn') }}</p>
+</form>
+
+{% endblock %}
