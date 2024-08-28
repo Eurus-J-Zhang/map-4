@@ -96,7 +96,7 @@
 
         // Show the modal with no close option if the current time is >= 09:00
         if (currentTimeStr >= "09:00") {
-            showModal('Sorry, it is already 9:00 and you have not reached your destination. You will be directed to the result page in 5 seconds.', false);
+            showModal('It is already 9:00 and you have not reached your destination. You will be directed to the result page in 5 seconds.', false);
             setTimeout(function() {
                 window.location.href = "/wrong"; // Redirect to the wrong.html page
             }, 5000); // 5000 milliseconds = 5 seconds
