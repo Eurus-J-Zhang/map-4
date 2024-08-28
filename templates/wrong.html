@@ -4,8 +4,9 @@
 <script>
     
     function fn1(){
-        window.location="emo";
+        window.location="emo_post";
     }
+
     function preventBack() { window.history.forward(); }  
     setTimeout("preventBack()", 0);  
     window.onunload = function () { null }; 
@@ -17,12 +18,15 @@
 {% block  top_block%}
 
 <p class="t_title">
-    <br>
-    I'm sorry, your metro exploration didn't reach the destination. <br>
-    The task was unsuccessful.<br>
-    Please continue to complete the questionnaire.     <br><br>
-
+    <br><br>
+    You have failed the task. <br>
+    Please continue to fill the questionnaire.   <br><br>
+<!-- <img src="{{ url_for('static', filename='img/alarm.jpg') }}" alt="Example Image"  style="width: 100%;"> -->
 <br></p>
 
+{% endblock %}
+
+
+{% block right_block %}
 <button onclick="fn1()" id="btn1" class = "continue-btn">Continue</button>
 {% endblock %}

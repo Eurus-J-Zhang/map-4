@@ -46,7 +46,7 @@
         // Logic to show another modal based on conditions
         if (currentStation === 'Millstone Square' && !secondModalShown) {
             secondModalShown = true; // Ensure this modal is shown only once
-            showModal('It seems no one is around to offer you any guidance, you will have to explore the metro yourself.');
+            showModal('It seems no one is around to offer you any help, you will have to explore the metro yourself.');
         }
     }
 
@@ -87,17 +87,11 @@
                 closeModal();
             };
 
-            // Close modal when clicking outside of the modal content
-            window.onclick = function(event) {
-                if (event.target == myModal) {
-                    closeModal();
-                }
-            };
         }
 
         // Show the modal if the station is 'Millstone Square'
         if (currentStation === 'Millstone Square') {
-            showModal(`However, the metro stops here unexpectedly. <br>`);
+            showModal("Unexpectedly, the metro stops here.");
         }
 
         // Show the modal with no close option if the current time is >= 09:00
@@ -152,6 +146,8 @@ Goal station:   CONBY VALE
     However, while on the metro, your phone died, leaving you no access to the digital map that you are used to.
     You remember that Condy Vale is on the Blue Line, 
     and if you take the metro to the direction of Perivale, you should arrive there in several stops without any transfer. 
+    <br><br>
+    Blue Line: <b>Giles Town</b> -> Lifting Parkway -> Millstone Square -> Bagton Mere -> <b>Condy Vale</b> -> Wofford Cross  -> Perivale
     <br><br>
 {% endblock %}
 
