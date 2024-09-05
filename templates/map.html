@@ -42,38 +42,10 @@
         if (myModal) {
             myModal.style.display = "none";
         }
-
-        // Logic to show another modal based on conditions
-        // if (currentStation === 'Millstone Square' && !secondModalShown) {
-        //     secondModalShown = true; // Ensure this modal is shown only once
-        //     showModal('It seems no one is around to offer you any help, you will have to explore the metro yourself.');
-        // }
     }
 
-    // Initialize the countdown timer to 90 seconds
-    // let countdown = 90;
 
-    // Function to start the countdown timer
-    // function startCountdown() {
-    //     const timerElement = document.getElementById('timer');
 
-    //     const countdownInterval = setInterval(function() {
-    //         // Update the timer display
-    //         timerElement.textContent = countdown;
-
-    //         // Decrease the countdown by one second
-    //         countdown--;
-
-    //         // If the countdown reaches zero, redirect to the fail page
-    //         if (countdown < 0) {
-    //             clearInterval(countdownInterval);
-    //             showModal(`You have run out of time to make an action. You will be directed to the result page in 5 seconds`, false);
-    //             setTimeout(function() {
-    //                 window.location.href = "/wrong"; // Redirect to the wrong.html page
-    //             }, 5000);
-    //         }
-    //     }, 1000); // Update every second
-    // }
 
     // Set up close functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -118,14 +90,11 @@ Goal station:   CONBY VALE
     <br><br>
     Clock Time: <span style="border: 1px solid #000; padding: 5px; border-radius: 3px;padding-left: 3%;padding-right: 3%;">{{current_time}}</span>
     <br><br>
-    <!-- Time left to make an action:  -->
-    <!-- <span id="timer" style="border: 1px solid #000; padding: 5px; border-radius: 3px;padding-left: 3%;padding-right: 3%;">90</span> seconds -->
-</div> 
+    </div> 
 {% endblock %}
 <br><br>
 
 {% block left_block %}
-
 
 {% if session.get('s3_visited') %}
 
