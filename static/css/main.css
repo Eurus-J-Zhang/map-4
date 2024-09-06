@@ -58,7 +58,7 @@ form p {
 
 .my-table {
     /* padding-right: 20px; */
-    width: 40%;
+    width: 500px;
 
 }
 
@@ -158,8 +158,8 @@ form p {
     gap: 20px; /* Adjust the gap as needed */
     margin-top: auto; 
     margin-bottom: auto;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     font-size: 20px;
 }
 
@@ -191,8 +191,6 @@ form p {
     /* border: 1px solid #ccc;  */
     /* Optional: Add a border */
 }
-
-
 
 .headline {
     padding: 10px; /* Add some padding to the blocks */
